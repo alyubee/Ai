@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Solutions | Minimalis & Modern</title>
+    <title>AI Solutions | Platform AI Modern untuk Bisnis</title>
+    <meta name="description" content="Solusi AI terdepan untuk mengoptimalkan bisnis Anda dengan teknologi kecerdasan buatan yang canggih dan mudah diintegrasikan">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -16,10 +17,13 @@
         :root {
             --primary: #6366f1;
             --primary-dark: #4f46e5;
+            --primary-light: #818cf8;
             --secondary: #10b981;
             --dark: #1f2937;
+            --dark-light: #374151;
             --light: #f9fafb;
             --gray: #6b7280;
+            --gray-light: #9ca3af;
         }
 
         body {
@@ -37,12 +41,19 @@
 
         /* Header */
         header {
-            background-color: white;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        header.scrolled {
+            background-color: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
         }
 
         nav {
@@ -59,10 +70,12 @@
             display: flex;
             align-items: center;
             cursor: pointer;
+            text-decoration: none;
         }
 
         .logo i {
             margin-right: 10px;
+            font-size: 28px;
         }
 
         .nav-links {
@@ -79,6 +92,22 @@
             color: var(--dark);
             font-weight: 500;
             transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
         }
 
         .nav-links a:hover {
@@ -89,64 +118,108 @@
             background-color: var(--primary);
             color: white;
             padding: 10px 20px;
-            border-radius: 5px;
+            border-radius: 8px;
             text-decoration: none;
             font-weight: 500;
-            transition: background-color 0.3s;
+            transition: all 0.3s;
             display: inline-block;
+            border: 2px solid var(--primary);
         }
 
         .cta-button:hover {
             background-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(99, 102, 241, 0.3);
+        }
+
+        .mobile-menu {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--dark);
         }
 
         /* Hero Section */
         .hero {
-            padding: 150px 0 100px;
+            padding: 180px 0 120px;
             text-align: center;
             background: linear-gradient(135deg, #f0f4ff 0%, #e6f7ff 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.1) 0%, rgba(99, 102, 241, 0) 70%);
+            border-radius: 50%;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(16, 185, 129, 0.1) 0%, rgba(16, 185, 129, 0) 70%);
+            border-radius: 50%;
+            z-index: 0;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
         }
 
         .hero h1 {
             font-size: 3.5rem;
             margin-bottom: 20px;
             color: var(--dark);
+            line-height: 1.2;
         }
 
         .hero p {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             color: var(--gray);
             max-width: 700px;
-            margin: 0 auto 30px;
+            margin: 0 auto 40px;
         }
 
         .hero-buttons {
             display: flex;
             justify-content: center;
-            gap: 15px;
+            gap: 20px;
+            flex-wrap: wrap;
         }
 
         .btn {
-            padding: 12px 30px;
-            border-radius: 5px;
+            padding: 14px 32px;
+            border-radius: 8px;
             text-decoration: none;
-            font-weight: 500;
+            font-weight: 600;
             transition: all 0.3s;
             display: inline-block;
             cursor: pointer;
             border: none;
             font-size: 16px;
+            text-align: center;
         }
 
         .btn-primary {
             background-color: var(--primary);
             color: white;
+            box-shadow: 0 4px 14px rgba(99, 102, 241, 0.4);
         }
 
         .btn-primary:hover {
             background-color: var(--primary-dark);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(99, 102, 241, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(99, 102, 241, 0.5);
         }
 
         .btn-secondary {
@@ -157,7 +230,8 @@
 
         .btn-secondary:hover {
             background-color: rgba(99, 102, 241, 0.1);
-            transform: translateY(-2px);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(99, 102, 241, 0.2);
         }
 
         /* Features Section */
@@ -168,11 +242,11 @@
 
         .section-title {
             text-align: center;
-            margin-bottom: 60px;
+            margin-bottom: 70px;
         }
 
         .section-title h2 {
-            font-size: 2.5rem;
+            font-size: 2.8rem;
             color: var(--dark);
             margin-bottom: 15px;
         }
@@ -181,52 +255,55 @@
             color: var(--gray);
             max-width: 600px;
             margin: 0 auto;
+            font-size: 1.1rem;
         }
 
         .features-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 30px;
         }
 
         .feature-card {
             background-color: var(--light);
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s, box-shadow 0.3s;
+            padding: 40px 30px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06);
+            transition: all 0.4s ease;
             cursor: pointer;
+            text-align: center;
+            border: 1px solid rgba(0, 0, 0, 0.05);
         }
 
         .feature-card:hover {
             transform: translateY(-10px);
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            border-color: var(--primary-light);
         }
 
         .feature-icon {
-            width: 60px;
-            height: 60px;
-            background-color: rgba(99, 102, 241, 0.1);
-            border-radius: 50%;
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            border-radius: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 20px;
-        }
-
-        .feature-icon i {
-            font-size: 24px;
-            color: var(--primary);
+            margin: 0 auto 25px;
+            color: white;
+            font-size: 32px;
+            box-shadow: 0 5px 15px rgba(99, 102, 241, 0.3);
         }
 
         .feature-card h3 {
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             margin-bottom: 15px;
             color: var(--dark);
         }
 
         .feature-card p {
             color: var(--gray);
+            line-height: 1.7;
         }
 
         /* Demo Section */
@@ -238,7 +315,7 @@
         .demo-container {
             display: flex;
             align-items: center;
-            gap: 50px;
+            gap: 60px;
         }
 
         .demo-content {
@@ -246,144 +323,209 @@
         }
 
         .demo-content h2 {
-            font-size: 2.5rem;
+            font-size: 2.8rem;
             margin-bottom: 20px;
             color: var(--dark);
+            line-height: 1.2;
         }
 
         .demo-content p {
             color: var(--gray);
-            margin-bottom: 30px;
+            margin-bottom: 25px;
+            font-size: 1.1rem;
+            line-height: 1.7;
         }
 
         .demo-visual {
             flex: 1;
             background-color: white;
-            border-radius: 10px;
+            border-radius: 16px;
             padding: 30px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(0, 0, 0, 0.05);
         }
 
         .chat-container {
-            height: 300px;
+            height: 320px;
             overflow-y: auto;
             margin-bottom: 20px;
-            padding: 15px;
+            padding: 20px;
             background-color: #f8fafc;
-            border-radius: 8px;
+            border-radius: 12px;
+            border: 1px solid #e5e7eb;
         }
 
         .chat-message {
             margin-bottom: 15px;
-            padding: 10px 15px;
-            border-radius: 8px;
-            max-width: 80%;
+            padding: 12px 18px;
+            border-radius: 12px;
+            max-width: 85%;
+            line-height: 1.5;
+            animation: fadeIn 0.3s ease;
         }
 
         .user-message {
-            background-color: var(--primary);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
             color: white;
             margin-left: auto;
+            box-shadow: 0 2px 10px rgba(99, 102, 241, 0.3);
         }
 
         .ai-message {
             background-color: white;
             border: 1px solid #e5e7eb;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
         }
 
         .input-group {
             display: flex;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
 
         .input-group input {
             flex: 1;
-            padding: 12px 15px;
-            border: 1px solid #e5e7eb;
-            border-radius: 5px 0 0 5px;
+            padding: 15px 20px;
+            border: none;
             outline: none;
+            font-size: 16px;
+            background-color: white;
         }
 
         .input-group button {
-            background-color: var(--primary);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
             color: white;
             border: none;
-            padding: 0 20px;
-            border-radius: 0 5px 5px 0;
+            padding: 0 25px;
             cursor: pointer;
-            transition: background-color 0.3s;
+            transition: all 0.3s;
+            font-size: 18px;
         }
 
         .input-group button:hover {
-            background-color: var(--primary-dark);
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
         }
 
-        /* Modal */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: 2000;
-            justify-content: center;
+        /* Pricing Section */
+        .pricing {
+            padding: 100px 0;
+            background-color: white;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .pricing-card {
+            background-color: var(--light);
+            padding: 40px 30px;
+            border-radius: 16px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06);
+            transition: all 0.3s ease;
+            text-align: center;
+            border: 2px solid transparent;
+            position: relative;
+        }
+
+        .pricing-card.popular {
+            border-color: var(--primary);
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.2);
+        }
+
+        .pricing-card.popular::before {
+            content: 'Paling Populer';
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            padding: 5px 20px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .pricing-card.popular:hover {
+            transform: scale(1.05) translateY(-10px);
+        }
+
+        .pricing-header {
+            margin-bottom: 30px;
+        }
+
+        .pricing-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 10px;
+        }
+
+        .pricing-price {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+
+        .pricing-period {
+            color: var(--gray);
+            font-size: 1rem;
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin-bottom: 30px;
+            text-align: left;
+        }
+
+        .pricing-features li {
+            padding: 10px 0;
+            color: var(--dark);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            display: flex;
             align-items: center;
         }
 
-        .modal-content {
-            background-color: white;
-            padding: 40px;
-            border-radius: 10px;
-            max-width: 500px;
-            width: 90%;
-            text-align: center;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        .pricing-features li:last-child {
+            border-bottom: none;
         }
 
-        .modal h2 {
-            margin-bottom: 20px;
-            color: var(--dark);
-        }
-
-        .modal p {
-            margin-bottom: 30px;
-            color: var(--gray);
-        }
-
-        .close-modal {
-            background-color: var(--primary);
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-
-        .close-modal:hover {
-            background-color: var(--primary-dark);
+        .pricing-features li i {
+            color: var(--secondary);
+            margin-right: 10px;
+            font-size: 14px;
         }
 
         /* Footer */
         footer {
             background-color: var(--dark);
             color: white;
-            padding: 70px 0 20px;
+            padding: 80px 0 20px;
         }
 
         .footer-content {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 40px;
-            margin-bottom: 50px;
+            gap: 50px;
+            margin-bottom: 60px;
         }
 
         .footer-column h3 {
-            font-size: 1.2rem;
-            margin-bottom: 20px;
+            font-size: 1.3rem;
+            margin-bottom: 25px;
             position: relative;
-            padding-bottom: 10px;
+            padding-bottom: 12px;
         }
 
         .footer-column h3::after {
@@ -392,8 +534,9 @@
             left: 0;
             bottom: 0;
             width: 40px;
-            height: 2px;
-            background-color: var(--primary);
+            height: 3px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            border-radius: 2px;
         }
 
         .footer-links {
@@ -401,7 +544,7 @@
         }
 
         .footer-links li {
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
 
         .footer-links a {
@@ -409,47 +552,50 @@
             text-decoration: none;
             transition: color 0.3s;
             cursor: pointer;
+            display: inline-block;
         }
 
         .footer-links a:hover {
             color: white;
+            transform: translateX(5px);
         }
 
         .social-links {
             display: flex;
             gap: 15px;
-            margin-top: 20px;
+            margin-top: 25px;
         }
 
         .social-links a {
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 36px;
-            height: 36px;
+            width: 40px;
+            height: 40px;
             background-color: rgba(255, 255, 255, 0.1);
             border-radius: 50%;
             color: white;
             text-decoration: none;
-            transition: background-color 0.3s;
+            transition: all 0.3s;
             cursor: pointer;
         }
 
         .social-links a:hover {
-            background-color: var(--primary);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            transform: translateY(-3px);
         }
 
         .footer-bottom {
             text-align: center;
-            padding-top: 20px;
+            padding-top: 30px;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
             color: #9ca3af;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
         }
 
         /* Animations */
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
+            from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
@@ -467,14 +613,15 @@
             position: fixed;
             top: 100px;
             right: 20px;
-            background-color: var(--primary);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
             color: white;
             padding: 15px 25px;
-            border-radius: 5px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
             z-index: 3000;
             transform: translateX(150%);
-            transition: transform 0.3s ease;
+            transition: transform 0.4s ease;
+            max-width: 350px;
         }
 
         .notification.show {
@@ -482,49 +629,88 @@
         }
 
         /* Responsive */
+        @media (max-width: 968px) {
+            .demo-container {
+                flex-direction: column;
+            }
+            
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2.4rem;
+            }
+        }
+
         @media (max-width: 768px) {
             .nav-links {
                 display: none;
             }
 
-            .hero h1 {
-                font-size: 2.5rem;
+            .mobile-menu {
+                display: block;
             }
 
+            .hero h1 {
+                font-size: 2.4rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
             .hero-buttons {
                 flex-direction: column;
                 align-items: center;
             }
-
-            .demo-container {
-                flex-direction: column;
+            
+            .btn {
+                width: 100%;
+                max-width: 280px;
             }
-
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .pricing-card.popular {
+                transform: scale(1);
+            }
+            
+            .pricing-card.popular:hover {
+                transform: translateY(-10px);
+            }
+            
             .notification {
                 top: 80px;
                 right: 10px;
                 left: 10px;
+                max-width: none;
             }
         }
     </style>
 </head>
 <body>
     <!-- Header -->
-    <header>
+    <header id="header">
         <div class="container">
             <nav>
-                <div class="logo" id="logo">
+                <a href="#" class="logo">
                     <i class="fas fa-brain"></i>
                     <span>AI Solutions</span>
-                </div>
+                </a>
                 <ul class="nav-links">
                     <li><a href="#home">Home</a></li>
                     <li><a href="#features">Fitur</a></li>
                     <li><a href="#demo">Demo</a></li>
-                    <li><a href="#about">Tentang</a></li>
+                    <li><a href="#pricing">Harga</a></li>
                     <li><a href="#contact">Kontak</a></li>
                 </ul>
-                <a href="#" class="cta-button" id="ctaButton">Mulai Sekarang</a>
+                <a href="#pricing" class="cta-button">Mulai Sekarang</a>
+                <div class="mobile-menu" id="mobileMenu">
+                    <i class="fas fa-bars"></i>
+                </div>
             </nav>
         </div>
     </header>
@@ -532,11 +718,13 @@
     <!-- Hero Section -->
     <section class="hero" id="home">
         <div class="container">
-            <h1 class="animate-fade-in">Kekuatan AI untuk Masa Depan Bisnis Anda</h1>
-            <p class="animate-fade-in">Solusi AI canggih yang dirancang untuk membantu bisnis Anda tumbuh lebih cepat, lebih efisien, dan lebih cerdas.</p>
-            <div class="hero-buttons animate-fade-in">
-                <button class="btn btn-primary" id="tryFreeButton">Coba Gratis</button>
-                <button class="btn btn-secondary" id="learnMoreButton">Pelajari Lebih Lanjut</button>
+            <div class="hero-content">
+                <h1 class="animate-fade-in">Transformasi Bisnis Anda dengan Kekuatan AI</h1>
+                <p class="animate-fade-in">Platform AI terdepan yang membantu bisnis tumbuh lebih cepat, efisien, dan cerdas dengan teknologi kecerdasan buatan mutakhir.</p>
+                <div class="hero-buttons animate-fade-in">
+                    <a href="#pricing" class="btn btn-primary">Mulai Gratis 14 Hari</a>
+                    <a href="#demo" class="btn btn-secondary">Lihat Demo</a>
+                </div>
             </div>
         </div>
     </section>
@@ -545,8 +733,8 @@
     <section class="features" id="features">
         <div class="container">
             <div class="section-title">
-                <h2>Fitur Unggulan Kami</h2>
-                <p>Teknologi AI terdepan yang dapat mengubah cara Anda bekerja</p>
+                <h2>Fitur Unggulan Platform AI Kami</h2>
+                <p>Teknologi AI terdepan yang dapat mengubah cara bisnis Anda beroperasi</p>
             </div>
             <div class="features-grid">
                 <div class="feature-card" data-feature="assistant">
@@ -554,42 +742,42 @@
                         <i class="fas fa-robot"></i>
                     </div>
                     <h3>Asisten AI Cerdas</h3>
-                    <p>Asisten virtual yang dapat memahami kebutuhan Anda dan memberikan solusi tepat dalam waktu singkat.</p>
+                    <p>Asisten virtual yang memahami konteks bisnis Anda dan memberikan solusi tepat dalam waktu singkat dengan akurasi tinggi.</p>
                 </div>
                 <div class="feature-card" data-feature="analytics">
                     <div class="feature-icon">
                         <i class="fas fa-chart-line"></i>
                     </div>
                     <h3>Analitik Prediktif</h3>
-                    <p>Analisis data mendalam dengan algoritma prediktif untuk membantu pengambilan keputusan yang lebih baik.</p>
+                    <p>Analisis data mendalam dengan algoritma prediktif canggih untuk membantu pengambilan keputusan yang lebih baik dan akurat.</p>
                 </div>
                 <div class="feature-card" data-feature="language">
                     <div class="feature-icon">
                         <i class="fas fa-language"></i>
                     </div>
                     <h3>Pemrosesan Bahasa Alami</h3>
-                    <p>Memahami dan memproses bahasa manusia secara alami untuk interaksi yang lebih manusiawi.</p>
+                    <p>Memahami dan memproses bahasa manusia secara natural untuk interaksi yang lebih manusiawi dan efektif dengan pelanggan.</p>
                 </div>
                 <div class="feature-card" data-feature="automation">
                     <div class="feature-icon">
                         <i class="fas fa-cogs"></i>
                     </div>
-                    <h3>Otomasi Proses</h3>
-                    <p>Mengotomatiskan tugas-tugas berulang sehingga tim Anda dapat fokus pada pekerjaan yang lebih strategis.</p>
+                    <h3>Otomasi Proses Cerdas</h3>
+                    <p>Mengotomatiskan tugas-tugas berulang dan kompleks sehingga tim Anda dapat fokus pada pekerjaan yang lebih strategis.</p>
                 </div>
                 <div class="feature-card" data-feature="security">
                     <div class="feature-icon">
                         <i class="fas fa-shield-alt"></i>
                     </div>
-                    <h3>Keamanan Tingkat Lanjut</h3>
-                    <p>Sistem keamanan berlapis dengan enkripsi end-to-end untuk melindungi data sensitif Anda.</p>
+                    <h3>Keamanan Berlapis</h3>
+                    <p>Sistem keamanan berlapis dengan enkripsi end-to-end dan protokol keamanan mutakhir untuk melindungi data sensitif bisnis.</p>
                 </div>
                 <div class="feature-card" data-feature="integration">
                     <div class="feature-icon">
                         <i class="fas fa-sync-alt"></i>
                     </div>
-                    <h3>Integrasi Mudah</h3>
-                    <p>Dapat dengan mudah diintegrasikan dengan sistem dan aplikasi yang sudah Anda gunakan.</p>
+                    <h3>Integrasi Tanpa Batas</h3>
+                    <p>Dapat dengan mudah diintegrasikan dengan sistem, aplikasi, dan platform yang sudah Anda gunakan tanpa gangguan.</p>
                 </div>
             </div>
         </div>
@@ -600,27 +788,87 @@
         <div class="container">
             <div class="demo-container">
                 <div class="demo-content">
-                    <h2>Coba Demo AI Kami</h2>
-                    <p>Lihat sendiri bagaimana teknologi AI kami dapat membantu menyelesaikan masalah kompleks dengan cara yang sederhana dan intuitif.</p>
-                    <p>Ajukan pertanyaan atau minta bantuan dengan tugas tertentu, dan lihat bagaimana AI kami merespons.</p>
-                    <button class="btn btn-primary" id="registerButton">Daftar untuk Akses Penuh</button>
+                    <h2>Coba Demo Interaktif AI Kami</h2>
+                    <p>Lihat sendiri bagaimana teknologi AI kami dapat membantu menyelesaikan masalah bisnis kompleks dengan cara yang sederhana dan intuitif.</p>
+                    <p>Ajukan pertanyaan atau minta bantuan dengan tugas tertentu, dan saksikan bagaimana AI kami memberikan solusi yang relevan dan tepat sasaran.</p>
+                    <a href="#pricing" class="btn btn-primary">Daftar untuk Akses Penuh</a>
                 </div>
                 <div class="demo-visual">
                     <div class="chat-container" id="chatContainer">
                         <div class="chat-message ai-message">
-                            Halo! Saya asisten AI. Ada yang bisa saya bantu hari ini?
+                            <strong>AI Assistant:</strong> Halo! Saya asisten AI Solutions. Ada yang bisa saya bantu untuk bisnis Anda hari ini?
                         </div>
                         <div class="chat-message user-message">
-                            Bisakah Anda membantu saya menganalisis data penjualan?
+                            Bisakah Anda membantu saya menganalisis data penjualan kuartal terakhir?
                         </div>
                         <div class="chat-message ai-message">
-                            Tentu! Saya dapat membantu menganalisis data penjualan Anda. Upload data atau hubungkan dengan sistem Anda, dan saya akan memberikan insight yang berguna.
+                            <strong>AI Assistant:</strong> Tentu! Saya dapat membantu menganalisis data penjualan Anda. Upload data atau hubungkan dengan sistem Anda, dan saya akan memberikan insight mendalam tentang tren, performa produk, dan rekomendasi optimasi.
                         </div>
                     </div>
                     <div class="input-group">
-                        <input type="text" id="chatInput" placeholder="Ketik pesan Anda...">
+                        <input type="text" id="chatInput" placeholder="Ketik pertanyaan atau permintaan Anda...">
                         <button id="sendButton"><i class="fas fa-paper-plane"></i></button>
                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing" id="pricing">
+        <div class="container">
+            <div class="section-title">
+                <h2>Pilih Paket yang Tepat untuk Bisnis Anda</h2>
+                <p>Berbagai pilihan paket dengan fitur lengkap untuk semua skala bisnis</p>
+            </div>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <div class="pricing-name">Starter</div>
+                        <div class="pricing-price">Rp 299K</div>
+                        <div class="pricing-period">per bulan</div>
+                    </div>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> Asisten AI Dasar</li>
+                        <li><i class="fas fa-check"></i> Analitik Sederhana</li>
+                        <li><i class="fas fa-check"></i> 1.000 Request/Bulan</li>
+                        <li><i class="fas fa-check"></i> Dukungan Email</li>
+                        <li><i class="fas fa-times"></i> Integrasi API</li>
+                        <li><i class="fas fa-times"></i> Analitik Prediktif</li>
+                    </ul>
+                    <a href="#" class="btn btn-secondary" style="width: 100%;">Pilih Paket</a>
+                </div>
+                <div class="pricing-card popular">
+                    <div class="pricing-header">
+                        <div class="pricing-name">Professional</div>
+                        <div class="pricing-price">Rp 799K</div>
+                        <div class="pricing-period">per bulan</div>
+                    </div>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> Semua Fitur Starter</li>
+                        <li><i class="fas fa-check"></i> Asisten AI Lengkap</li>
+                        <li><i class="fas fa-check"></i> Analitik Prediktif</li>
+                        <li><i class="fas fa-check"></i> 10.000 Request/Bulan</li>
+                        <li><i class="fas fa-check"></i> Integrasi API</li>
+                        <li><i class="fas fa-check"></i> Dukungan Prioritas</li>
+                    </ul>
+                    <a href="#" class="btn btn-primary" style="width: 100%;">Pilih Paket</a>
+                </div>
+                <div class="pricing-card">
+                    <div class="pricing-header">
+                        <div class="pricing-name">Enterprise</div>
+                        <div class="pricing-price">Rp 1,999K</div>
+                        <div class="pricing-period">per bulan</div>
+                    </div>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i> Semua Fitur Professional</li>
+                        <li><i class="fas fa-check"></i> Request Unlimited</li>
+                        <li><i class="fas fa-check"></i> Kustomisasi AI</li>
+                        <li><i class="fas fa-check"></i> Integrasi Kustom</li>
+                        <li><i class="fas fa-check"></i> SLA 99.9%</li>
+                        <li><i class="fas fa-check"></i> Manajer Akun Dedicated</li>
+                    </ul>
+                    <a href="#" class="btn btn-secondary" style="width: 100%;">Hubungi Penjualan</a>
                 </div>
             </div>
         </div>
@@ -632,7 +880,7 @@
             <div class="footer-content">
                 <div class="footer-column">
                     <h3>AI Solutions</h3>
-                    <p>Membawa masa depan AI ke bisnis Anda dengan solusi yang inovatif dan mudah digunakan.</p>
+                    <p>Membawa masa depan AI ke bisnis Anda dengan solusi yang inovatif, mudah digunakan, dan berdampak langsung pada pertumbuhan.</p>
                     <div class="social-links">
                         <a href="#" class="social-link" data-platform="github"><i class="fab fa-github"></i></a>
                         <a href="#" class="social-link" data-platform="twitter"><i class="fab fa-twitter"></i></a>
@@ -672,19 +920,10 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2023 AI Solutions. Dibuat dengan ❤️ menggunakan GitHub dan Render.</p>
+                <p>&copy; 2023 AI Solutions. Dibuat dengan ❤️ menggunakan GitHub dan Render. All rights reserved.</p>
             </div>
         </div>
     </footer>
-
-    <!-- Modal -->
-    <div class="modal" id="modal">
-        <div class="modal-content">
-            <h2 id="modalTitle">Selamat Datang di AI Solutions</h2>
-            <p id="modalMessage">Fitur ini akan segera tersedia. Silakan hubungi kami untuk informasi lebih lanjut.</p>
-            <button class="close-modal" id="closeModal">Tutup</button>
-        </div>
-    </div>
 
     <!-- Notification -->
     <div class="notification" id="notification">
@@ -692,6 +931,16 @@
     </div>
 
     <script>
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
         // Show notification
         function showNotification(message) {
             const notification = document.getElementById('notification');
@@ -702,61 +951,12 @@
             
             setTimeout(() => {
                 notification.classList.remove('show');
-            }, 3000);
+            }, 4000);
         }
 
-        // Modal functionality
-        const modal = document.getElementById('modal');
-        const modalTitle = document.getElementById('modalTitle');
-        const modalMessage = document.getElementById('modalMessage');
-        const closeModal = document.getElementById('closeModal');
-
-        function openModal(title, message) {
-            modalTitle.textContent = title;
-            modalMessage.textContent = message;
-            modal.style.display = 'flex';
-        }
-
-        closeModal.addEventListener('click', () => {
-            modal.style.display = 'none';
-        });
-
-        // Close modal when clicking outside
-        window.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                modal.style.display = 'none';
-            }
-        });
-
-        // Logo click
-        document.getElementById('logo').addEventListener('click', () => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-            showNotification('Kembali ke beranda');
-        });
-
-        // CTA Button click
-        document.getElementById('ctaButton').addEventListener('click', (e) => {
-            e.preventDefault();
-            openModal('Mulai Sekarang', 'Terima kasih atas minat Anda! Silakan isi formulir pendaftaran untuk memulai perjalanan AI Anda.');
-            showNotification('Formulir pendaftaran akan segera tersedia');
-        });
-
-        // Try Free Button click
-        document.getElementById('tryFreeButton').addEventListener('click', () => {
-            openModal('Coba Gratis', 'Dapatkan akses 14 hari gratis untuk semua fitur premium kami. Tidak perlu kartu kredit.');
-            showNotification('Membuka opsi trial gratis');
-        });
-
-        // Learn More Button click
-        document.getElementById('learnMoreButton').addEventListener('click', () => {
-            openModal('Pelajari Lebih Lanjut', 'Kami akan mengirimkan brosur dan informasi detail tentang solusi AI kami ke email Anda.');
-            showNotification('Informasi akan dikirim ke email Anda');
-        });
-
-        // Register Button click
-        document.getElementById('registerButton').addEventListener('click', () => {
-            openModal('Daftar untuk Akses Penuh', 'Buat akun Anda sekarang dan dapatkan akses penuh ke semua fitur platform AI kami.');
-            showNotification('Membuka formulir pendaftaran');
+        // Mobile menu toggle
+        document.getElementById('mobileMenu').addEventListener('click', () => {
+            showNotification('Menu mobile akan segera tersedia');
         });
 
         // Feature cards click
@@ -767,15 +967,11 @@
                     'assistant': 'Asisten AI Cerdas',
                     'analytics': 'Analitik Prediktif',
                     'language': 'Pemrosesan Bahasa Alami',
-                    'automation': 'Otomasi Proses',
-                    'security': 'Keamanan Tingkat Lanjut',
-                    'integration': 'Integrasi Mudah'
+                    'automation': 'Otomasi Proses Cerdas',
+                    'security': 'Keamanan Berlapis',
+                    'integration': 'Integrasi Tanpa Batas'
                 };
                 
-                openModal(
-                    featureNames[feature],
-                    `Detail lengkap tentang ${featureNames[feature]} akan segera tersedia. Hubungi tim penjualan kami untuk demo khusus.`
-                );
                 showNotification(`Membuka detail ${featureNames[feature]}`);
             });
         });
@@ -785,11 +981,7 @@
             link.addEventListener('click', (e) => {
                 e.preventDefault();
                 const page = link.getAttribute('data-page');
-                openModal(
-                    'Informasi Halaman',
-                    `Halaman "${page.replace('-', ' ')}" sedang dalam pengembangan. Silakan kunjungi kembali nanti.`
-                );
-                showNotification(`Membuka halaman ${page}`);
+                showNotification(`Halaman ${page.replace('-', ' ')} akan segera tersedia`);
             });
         });
 
@@ -798,11 +990,17 @@
             link.addEventListener('click', (e) => {
                 e.preventDefault();
                 const platform = link.getAttribute('data-platform');
-                openModal(
-                    'Media Sosial',
-                    `Kami akan segera hadir di ${platform}. Follow kami untuk update terbaru!`
-                );
-                showNotification(`Membuka ${platform}`);
+                showNotification(`Kami akan segera hadir di ${platform}`);
+            });
+        });
+
+        // Pricing buttons click
+        document.querySelectorAll('.pricing-card .btn').forEach(button => {
+            button.addEventListener('click', (e) => {
+                e.preventDefault();
+                const card = button.closest('.pricing-card');
+                const planName = card.querySelector('.pricing-name').textContent;
+                showNotification(`Memproses pemilihan paket ${planName}`);
             });
         });
 
@@ -834,16 +1032,19 @@
                 setTimeout(() => {
                     const aiMessage = document.createElement('div');
                     aiMessage.className = 'chat-message ai-message';
+                    aiMessage.innerHTML = '<strong>AI Assistant:</strong> ';
                     
                     // Simple response logic
                     if (message.toLowerCase().includes('harga') || message.toLowerCase().includes('biaya')) {
-                        aiMessage.textContent = 'Untuk informasi harga, silakan kunjungi halaman pricing di website kami. Kami menawarkan berbagai paket sesuai kebutuhan bisnis Anda.';
+                        aiMessage.innerHTML += 'Untuk informasi harga lengkap, silakan kunjungi bagian pricing di website kami. Kami menawarkan berbagai paket sesuai kebutuhan bisnis Anda.';
                     } else if (message.toLowerCase().includes('fitur')) {
-                        aiMessage.textContent = 'Kami memiliki berbagai fitur AI seperti asisten virtual, analitik prediktif, pemrosesan bahasa alami, dan otomasi proses. Mana yang ingin Anda ketahui lebih lanjut?';
+                        aiMessage.innerHTML += 'Kami memiliki berbagai fitur AI seperti asisten virtual, analitik prediktif, pemrosesan bahasa alami, dan otomasi proses. Mana yang ingin Anda ketahui lebih lanjut?';
                     } else if (message.toLowerCase().includes('demo') || message.toLowerCase().includes('coba')) {
-                        aiMessage.textContent = 'Untuk akses demo lengkap, silakan daftar akun gratis. Anda akan mendapatkan akses 14 hari untuk mencoba semua fitur premium kami.';
+                        aiMessage.innerHTML += 'Untuk akses demo lengkap, silakan daftar akun gratis. Anda akan mendapatkan akses 14 hari untuk mencoba semua fitur premium kami.';
+                    } else if (message.toLowerCase().includes('integrasi') || message.toLowerCase().includes('sistem')) {
+                        aiMessage.innerHTML += 'Kami menyediakan API yang lengkap dan dokumentasi yang jelas untuk integrasi dengan sistem Anda. Tim teknis kami siap membantu proses integrasi.';
                     } else {
-                        aiMessage.textContent = 'Terima kasih atas pertanyaan Anda. Saya adalah demo AI sederhana. Untuk informasi lebih detail, silakan hubungi tim penjualan kami.';
+                        aiMessage.innerHTML += 'Terima kasih atas pertanyaan Anda. Saya adalah demo AI sederhana. Untuk informasi lebih detail dan kemampuan penuh, silakan hubungi tim penjualan kami.';
                     }
                     
                     chatContainer.appendChild(aiMessage);
@@ -854,7 +1055,7 @@
             }
         }
 
-        // Add scroll animation
+        // Add scroll animation for feature cards
         document.addEventListener('DOMContentLoaded', () => {
             const observerOptions = {
                 threshold: 0.1,
@@ -872,6 +1073,14 @@
 
             // Observe feature cards
             document.querySelectorAll('.feature-card').forEach(card => {
+                card.style.opacity = 0;
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                observer.observe(card);
+            });
+
+            // Observe pricing cards
+            document.querySelectorAll('.pricing-card').forEach(card => {
                 card.style.opacity = 0;
                 card.style.transform = 'translateY(20px)';
                 card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
